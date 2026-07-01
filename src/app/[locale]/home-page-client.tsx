@@ -39,14 +39,14 @@ export default function PalabrasPage() {
         ))}
       </div>
 
-      {tab === 'anagram' && <AnagramSolver dict={dict} />}
-      {tab === 'unscramble' && <WordUnscrambler dict={dict} />}
+      {tab === 'anagram' && <AnagramSolver dict={dict} locale={locale} />}
+      {tab === 'unscramble' && <WordUnscrambler dict={dict} locale={locale} />}
       {tab === 'counter' && <CharCounter dict={dict} />}
     </div>
   );
 }
 
-function AnagramSolver({ dict }: { dict: any }) {
+function AnagramSolver({ dict, locale }: { dict: any; locale: string }) {
   const [input, setInput] = useState('');
   const [sortBy, setSortBy] = useState<'length' | 'alpha'>('length');
 
@@ -95,12 +95,12 @@ function AnagramSolver({ dict }: { dict: any }) {
       {input.length < 3 && (
         <div className="py-8 text-center">
           <div className="mx-auto mb-4 max-w-md rounded-xl bg-gradient-to-r from-primary/5 to-secondary/30 p-4 text-left">
-            <p className="mb-1 flex items-center gap-1 text-sm font-medium"><span className="text-lg">💡</span> Cómo usar:</p>
+            <p className="mb-1 flex items-center gap-1 text-sm font-medium"><span className="text-lg">💡</span> {locale === 'pt' ? 'Como usar:' : locale === 'en' ? 'How to use:' : 'Cómo usar:'}</p>
             <ul className="space-y-1 text-xs text-muted-foreground">
-              <li>• Escribe entre 3 y 8 letras sin espacios</li>
-              <li>• Ejemplo: escribe <strong>AMOR</strong> → encuentra ROMA, MORA, RAMO</li>
-              <li>• Haz clic en cualquier palabra para copiarla al portapapeles</li>
-              <li>• Cambia el orden por longitud o alfabéticamente</li>
+              <li>• {locale === 'pt' ? 'Digite entre 3 e 8 letras sem espaços' : locale === 'en' ? 'Type 3 to 8 letters without spaces' : 'Escribe entre 3 y 8 letras sin espacios'}</li>
+              <li>• {locale === 'pt' ? <>Exemplo: digite <strong>AMOR</strong> → encontra ROMA, MORA, RAMO</> : locale === 'en' ? <>Example: type <strong>AMOR</strong> → finds ROMA, MORA, RAMO</> : <>Ejemplo: escribe <strong>AMOR</strong> → encuentra ROMA, MORA, RAMO</>}</li>
+              <li>• {locale === 'pt' ? 'Clique em qualquer palavra para copiá-la' : locale === 'en' ? 'Click any word to copy it' : 'Haz clic en cualquier palabra para copiarla al portapapeles'}</li>
+              <li>• {locale === 'pt' ? 'Ordene por comprimento ou alfabeticamente' : locale === 'en' ? 'Sort by length or alphabetically' : 'Cambia el orden por longitud o alfabéticamente'}</li>
             </ul>
           </div>
           <p className="text-muted-foreground">{dict.enterLetters} (3-8 letras)</p>
@@ -110,7 +110,7 @@ function AnagramSolver({ dict }: { dict: any }) {
   );
 }
 
-function WordUnscrambler({ dict }: { dict: any }) {
+function WordUnscrambler({ dict, locale }: { dict: any; locale: string }) {
   const [input, setInput] = useState('');
 
   const matches = useMemo(() => {
@@ -146,7 +146,7 @@ function WordUnscrambler({ dict }: { dict: any }) {
           maxLength={10} />
       </div>
       <div className="mb-4 -mt-2 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/30 p-3 text-xs text-muted-foreground">
-        💡 <strong>Letras desordenadas</strong> — Ejemplo: <strong>EJRMPO</strong> encuentra PERRO, RO, O, etc. Ideal para Scrabble.
+        💡 {locale === 'pt' ? <><strong>Letras embaralhadas</strong> — Exemplo:</> : locale === 'en' ? <><strong>Scrambled letters</strong> — Example:</> : <><strong>Letras desordenadas</strong> — Ejemplo:</>} <strong>EJRMPO</strong> {locale === 'pt' ? 'encontra PERRO, RO, O, etc. Ideal para Scrabble.' : locale === 'en' ? 'finds PERRO, RO, O, etc. Great for Scrabble.' : 'encuentra PERRO, RO, O, etc. Ideal para Scrabble.'}
       </div>
       {input.length >= 3 && (
         <>
