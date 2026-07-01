@@ -93,7 +93,18 @@ function AnagramSolver({ dict }: { dict: any }) {
         </>
       )}
       {input.length < 3 && (
-        <p className="py-8 text-center text-muted-foreground">{dict.enterLetters} (3-8 letras)</p>
+        <div className="py-8 text-center">
+          <div className="mx-auto mb-4 max-w-md rounded-xl bg-gradient-to-r from-primary/5 to-secondary/30 p-4 text-left">
+            <p className="mb-1 flex items-center gap-1 text-sm font-medium"><span className="text-lg">💡</span> Cómo usar:</p>
+            <ul className="space-y-1 text-xs text-muted-foreground">
+              <li>• Escribe entre 3 y 8 letras sin espacios</li>
+              <li>• Ejemplo: escribe <strong>AMOR</strong> → encuentra ROMA, MORA, RAMO</li>
+              <li>• Haz clic en cualquier palabra para copiarla al portapapeles</li>
+              <li>• Cambia el orden por longitud o alfabéticamente</li>
+            </ul>
+          </div>
+          <p className="text-muted-foreground">{dict.enterLetters} (3-8 letras)</p>
+        </div>
       )}
     </div>
   );
@@ -133,6 +144,9 @@ function WordUnscrambler({ dict }: { dict: any }) {
           placeholder="E J E M P L O"
           className="flex-1 rounded-xl border border-border bg-background px-4 py-3 text-center text-2xl font-mono tracking-[0.3em] focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 uppercase"
           maxLength={10} />
+      </div>
+      <div className="mb-4 -mt-2 rounded-xl bg-gradient-to-r from-primary/5 to-secondary/30 p-3 text-xs text-muted-foreground">
+        💡 <strong>Letras desordenadas</strong> — Ejemplo: <strong>EJRMPO</strong> encuentra PERRO, RO, O, etc. Ideal para Scrabble.
       </div>
       {input.length >= 3 && (
         <>
