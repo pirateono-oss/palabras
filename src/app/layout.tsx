@@ -5,6 +5,17 @@ import './globals.css';
 export const metadata: Metadata = {
   title: 'Free Tools',
   description: 'Free online tools - IP lookup, password generator, word counter, QR code generator',
+  manifest: '/manifest.webmanifest',
+  icons: {
+    icon: [{ url: '/icon-192.png', sizes: '192x192', type: 'image/png' }, { url: '/icon-512.png', sizes: '512x512', type: 'image/png' }],
+    apple: [{ url: '/icon-192.png', sizes: '192x192' }],
+  },
+  openGraph: {
+    title: 'Herramientas de Palabras - Word Tools',
+    description: 'Analizador de anagramas, resuelve palabras y contador de caracteres gratis',
+    images: [{ url: '/icon-512.png', width: 512, height: 512 }],
+    type: 'website',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
